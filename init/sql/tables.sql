@@ -20,8 +20,6 @@ CREATE TABLE `u_role` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL unique COMMENT '角色名称',
   `code` varchar(10) NOT NULL  unique  COMMENT '角色类型 code 唯一码',
-  `appointments_id` bigint(3) DEFAULT NULL COMMENT '角色对应的职务id', 
-  `parent_id` bigint(20) DEFAULT NULL COMMENT '父id', 
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
@@ -71,7 +69,16 @@ CREATE TABLE `u_user_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-/*Table structure for table `city_company` 城市公司*/
+
+/*Table structure for table `province` 省*/
+DROP TABLE IF EXISTS `province`;
+
+CREATE TABLE `province` (
+  `id` bigint(5) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL COMMENT '省名称',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+
 
 DROP TABLE IF EXISTS `member_community_rel`;
 DROP TABLE IF EXISTS `member_callfix_form`;
@@ -80,13 +87,16 @@ DROP TABLE IF EXISTS `lost_info_form`;
 DROP TABLE IF EXISTS `house`;
 DROP TABLE IF EXISTS `building`;
 DROP TABLE IF EXISTS `community`;
-DROP TABLE IF EXISTS `city`;
 
+/*Table structure for table `city` 城市*/
+DROP TABLE IF EXISTS `city`;
 
 CREATE TABLE `city` (
   `id` bigint(5) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL COMMENT '城市名称',
-  PRIMARY KEY (`id`)
+  `province_id` bigint(5) default NULL COMMENT '省id',
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (province_id) REFERENCES province(id) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 

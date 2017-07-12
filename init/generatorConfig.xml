@@ -8,30 +8,40 @@
 		    <property name="suppressAllComments" value="true" />      
 	 	</commentGenerator>   
 	 	
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://42.51.4.198:3336/ldfinancesys" userId="ldfs" password="ldfs"> 
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://43.254.53.219:3336/ldpms" userId="ldpms" password="ldpms"> 
 		 </jdbcConnection> 
 		 
 		<javaTypeResolver> 
 			<property name="forceBigDecimals" value="false"/> 
 		</javaTypeResolver> 
 		
-		<javaModelGenerator targetPackage="com.ld.common.model" targetProject="LDFinanceReportSys\src\main\java"> 
+		<javaModelGenerator targetPackage="com.ld.common.model" targetProject="ldpms\src\main\java"> 
 			<property name="enableSubPackages" value="true"/> 
 			<property name="trimStrings" value="true"/> 
 		</javaModelGenerator> 
 		
-		<sqlMapGenerator targetPackage="mapper" targetProject="LDFinanceReportSys\src\main\resources"> 
+		<sqlMapGenerator targetPackage="mapper" targetProject="ldpms\src\main\resources"> 
 			<property name="enableSubPackages" value="true"/> 
 		</sqlMapGenerator> 
 		
-		<javaClientGenerator type="XMLMAPPER" targetPackage="com.ld.common.dao" targetProject="LDFinanceReportSys\src\main\java"> 
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.ld.common.dao" targetProject="ldpms\src\main\java"> 
 			<property name="enableSubPackages" value="true"/> 
 		</javaClientGenerator> 
 		
-		 <table tableName="u_appointments" domainObjectName="UAppointments" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-		  <!-- 
-		  <table tableName="MESSAGE_RECORD" domainObjectName="MessageRecord" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-		  <table tableName="BUSER_ROLE" domainObjectName="BuserRole" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
-			-->
-	</context> 
+		 <table tableName="province" domainObjectName="ProvinceModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		 <table tableName="city" domainObjectName="CityModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		 <table tableName="property_company" domainObjectName="PropertyCompanyModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		 <table tableName="community" domainObjectName="CommunityModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		 <table tableName="building" domainObjectName="BuildingModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		 <table tableName="house_business_type" domainObjectName="HouseBusinessTypeModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		 <table tableName="house_business_sub_type" domainObjectName="HouseBusinessSubTypeModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		 <table tableName="house" domainObjectName="houseModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		 <table tableName="parking_space" domainObjectName="ParkingSpaceModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		 <table tableName="CUSTOMER" domainObjectName="CustomerModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		 <table tableName="member_community_rel" domainObjectName="MemberCommunityRelModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		 <table tableName="member_parking_space_rel" domainObjectName="MemberParkingSpaceRelModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		 <table tableName="member_callfix_form" domainObjectName="MemberCallfixFormModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		 <table tableName="public_information" domainObjectName="PublicInformation" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		 <table tableName="lost_info_form" domainObjectName="LostInfoFormModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		 </context> 
 </generatorConfiguration> 
