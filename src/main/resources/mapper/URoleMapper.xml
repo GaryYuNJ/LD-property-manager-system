@@ -5,40 +5,12 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="code" property="code" jdbcType="VARCHAR" />
-    <result column="appointments_id" property="appointmentId" jdbcType="BIGINT" />
-    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
   </resultMap>
-  
-  <resultMap id="Basewith_appointment_resultMap" type="com.ld.common.model.URole" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="code" property="code" jdbcType="VARCHAR" />
-    <result column="appointments_id" property="appointmentId" jdbcType="BIGINT" />
-    <result column="parent_id" property="parentId" jdbcType="BIGINT" />
-    <association property="appointment" javaType="com.ld.common.model.UAppointments"
-		resultMap="appointmentsResultMap"/>
-  </resultMap>
-  
-  <resultMap id="appointmentsResultMap" type="com.ld.common.model.UAppointments">
-	    <id  column="a_id" property="id" jdbcType="BIGINT" />
-	    <result column="a_name" property="name" jdbcType="VARCHAR" />
-	    <result column="a_commission_flag" property="commissionFlag" jdbcType="BIGINT" />
-	    <result column="a_commission_ratio" property="commissionRatio" jdbcType="DECIMAL" />
-	    <result column="a_commi_calcu_method" property="commiCalcuMethod" jdbcType="BIGINT" />
-	    <result column="a_house_relation" property="houseRelation" jdbcType="BIGINT" />
-	    <result column="a_parent_id" property="parentId" jdbcType="BIGINT" />
-    </resultMap>
   
   <sql id="Base_Column_List" >
-    id, name, code,appointments_id,parent_id
+    id, name, code
   </sql>
-  
-  <sql id="Basewith_appointment_Column_List" >
-    r.id, r.name, r.code, r.appointments_id a_appointments_id, r.parent_id,
-    a.id as a_id, a.name as a_name, a.commission_flag as a_commission_flag, a.commission_ratio as a_commission_ratio,
-     a.commi_calcu_method as a_commi_calcu_method,  a.house_relation as a_house_relation, a.parent_id as a_parent_id
-  </sql>
-  
+
   <sql id="limit_sql">
   	   <if test="page_sql != null and page_sql != ''">
       	${page_sql}
@@ -68,13 +40,14 @@
   </select>
 
   <!-- 普通的分页查询 -->
-  <select id="findAll" resultMap="Basewith_appointment_resultMap" >
+  <select id="findAll" resultMap="BaseResultMap" >
   	 select 
-    <include refid="Basewith_appointment_Column_List" />
-    from u_role r left join u_appointments a on a.id=r.appointments_id
+    <include refid="Base_Column_List" />
+    from u_role r 
     <include refid="where_all"/>
     <include refid="limit_sql" />
   </select>
+  
   <select id="findCount" resultMap="BaseResultMap" >
  	 select count(id) from  u_role
   	<include refid="where_all" />
@@ -134,8 +107,8 @@
    
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
-    <include refid="Basewith_appointment_Column_List" />
-    from u_role r left join u_appointments a on a.id=r.appointments_id
+    <include refid="Base_Column_List" />
+    from u_role r 
     where r.id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
