@@ -44,7 +44,7 @@
                     <div class="form-group">
                       <label class="control-label col-lg-3" for="userName">用戶名</label>
                       <div class="col-lg-9">
-                        <input type="text" class="form-control" id="userName" name="userName" placeholder="手机号">
+                        <input type="text" class="form-control" id="userName" name="userName" placeholder="手机号/登录名">
                       </div>
                     </div>
                     <!-- Password -->

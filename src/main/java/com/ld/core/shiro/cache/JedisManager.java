@@ -69,13 +69,13 @@ public class JedisManager {
         jedis.close();
     }
 
-    public byte[] getValueByKey(int dbIndex, byte[] key) throws Exception {
+    public byte[] getValueByKey( byte[] key) throws Exception {
         Jedis jedis = null;
         byte[] result = null;
         boolean isBroken = false;
         try {
             jedis = getJedis();
-            jedis.select(dbIndex);
+            //jedis.select(dbIndex);
             result = jedis.get(key);
         } catch (Exception e) {
             isBroken = true;
@@ -86,12 +86,12 @@ public class JedisManager {
         return result;
     }
 
-    public void deleteByKey(int dbIndex, byte[] key) throws Exception {
+    public void deleteByKey( byte[] key) throws Exception {
         Jedis jedis = null;
         boolean isBroken = false;
         try {
             jedis = getJedis();
-            jedis.select(dbIndex);
+            //jedis.select(dbIndex);
             Long result = jedis.del(key);
             LoggerUtils.fmtDebug(getClass(), "删除Session结果：%s" , result);
         } catch (Exception e) {
@@ -102,13 +102,13 @@ public class JedisManager {
         }
     }
 
-    public void saveValueByKey(int dbIndex, byte[] key, byte[] value, int expireTime)
+    public void saveValueByKey(byte[] key, byte[] value, int expireTime)
             throws Exception {
         Jedis jedis = null;
         boolean isBroken = false;
         try {
             jedis = getJedis();
-            jedis.select(dbIndex);
+            //jedis.select(dbIndex);
             jedis.set(key, value);
             if (expireTime > 0)
                 jedis.expire(key, expireTime);
@@ -136,13 +136,13 @@ public class JedisManager {
 	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
-	public Collection<Session> AllSession(int dbIndex, String redisShiroSession) throws Exception {
+	public Collection<Session> AllSession(String redisShiroSession) throws Exception {
 		Jedis jedis = null;
         boolean isBroken = false;
         Set<Session> sessions = new HashSet<Session>();
 		try {
             jedis = getJedis();
-            jedis.select(dbIndex);
+            //jedis.select(dbIndex);
             
             Set<byte[]> byteKeys = jedis.keys((JedisShiroSessionRepository.REDIS_SHIRO_ALL).getBytes());  
             if (byteKeys != null && byteKeys.size() > 0) {  

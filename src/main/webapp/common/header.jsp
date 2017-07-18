@@ -27,7 +27,8 @@
 <link href="<c:url value="/style/fileinput.min.css" />" rel="stylesheet">
 <link href="<c:url value="/style/bootstrap-select.min.css" />" rel="stylesheet">
 <link href="<c:url value="/style/extend_top.css" />" rel="stylesheet">
-
+<link href="<c:url value="/style/jquery-ui.min.css" />" rel="stylesheet">
+<link href="<c:url value="/style/newstyle.css" />" rel="stylesheet">
 
 <!-- HTML5 Support for IE -->
 <!--[if lt IE 9]>
@@ -87,6 +88,19 @@ var rootUri="${rootUri}";
 							</ul>
 						</li>	
 						</shiro:hasPermission>
+						
+						<li class="dropdown">
+							<a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="<c:url value="/user/userInfo" />">
+								小区管理<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="<c:url value="/community/communityList.shtml" />">小区列表</a></li>
+								<li><a href="<c:url value="" />">业主管理</a></li>
+								<li><a href="<c:url value="/community/publicInfoList.shtml" />">公告管理</a></li>
+								<li><a href="<c:url value="/community/ownerCallfixList.shtml" />">报修管理</a></li>
+								<li><a href="<c:url value="/community/lostInfoList.shtml" />">失物管理</a></li>
+							</ul>
+						</li>
 						
 			          </ul>
 			          
