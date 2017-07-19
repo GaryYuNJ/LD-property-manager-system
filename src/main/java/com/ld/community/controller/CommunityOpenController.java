@@ -58,9 +58,9 @@ public class CommunityOpenController extends BaseController {
 	@Autowired
 	OwnerCallFixService ownerCallfixService;
 	
-	@RequestMapping(value="publicInfoListByCommunityId",method=RequestMethod.POST)
+	@RequestMapping(value="publicInfoListByCommunityCode",method=RequestMethod.POST)
 	@ResponseBody
-	public Object getPublicInfoListByCommunityId(CommonRequestParam commonRequestParam){
+	public Object getPublicInfoListByCommunityCode(CommonRequestParam commonRequestParam){
 		
 		String communityCode = commonRequestParam.getCommunityCode();
 		
@@ -99,26 +99,27 @@ public class CommunityOpenController extends BaseController {
 		return resultMap;
 	}
 
-	@RequestMapping(value="lostInfoList")
-	public ModelAndView getLostInfoList(Long communityId, ModelMap modelMap){
-		//获取用户有关系的小区
-		Long userId = TokenManager.getUserId();
-		List<CommunityModel> communities = communityService.queryCommunitiesByUserId(userId); 
+	@RequestMapping(value="lostInfoListByCommunityCode",method=RequestMethod.POST)
+	@ResponseBody
+	public Object getLostInfoListByCommunityCode(CommonRequestParam commonRequestParam){
 		
-		modelMap.put("communityModels", JSON.toJSONString(communities));
 		
-		if(null == communities || communities.size() ==0){
-			communityId = 0L;
-		}else if(null == communityId){
-			communityId = communities.get(0).getId();
+		String communityCode = commonRequestParam.getCommunityCode();
+		
+		//get communityId by code
+		CommunityModel communityModel = communityService.queryCommunityByCode(communityCode);
+		if(null == communityModel){
+			return null;
 		}
 		
-		//如果入参 communityId为空，取有关系小区第一个值；
-		modelMap.put("findContent", communityId);
+		Integer pageNo = commonRequestParam.getPageNo() == null ? super.pageNo : commonRequestParam.getPageNo();
+		Map<String,Object> modelMap = new HashMap<String,Object>();
+
+		modelMap.put("findContent", communityModel.getId());
+		
 		Pagination<LostInfoFormModel> lostInformation = lostInfoService.findPage(modelMap,pageNo,pageSize);
 		
-		modelMap.put("pageIndex", 4);
-		return new ModelAndView("community/lostInfoList","page",lostInformation);
+		return null != lostInformation ? lostInformation.getList():null;
 	}
 	
 	

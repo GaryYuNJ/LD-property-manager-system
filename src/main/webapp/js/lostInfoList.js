@@ -47,7 +47,7 @@
 						$('#lostInfo_id').val(result.model.id);
 						$('#object_name').val(result.model.objectName);
 						$('#pickup_user_name').val(result.model.pickupUserName);
-						$('#datepicker').val(result.model.pickupTime);
+						$('#datepicker').val(getDateString(result.model.time));
 						$('#pickup_location').val(result.model.pickupLocation);
 						$('#desc').val(result.model.desc);
 						$('#mobile').val(result.model.mobile);
@@ -57,6 +57,9 @@
 						$('#lost_user_mobile').val(result.model.lostUserMobile);
 						$('#lost_user_id').val(result.model.lostUserId);
 						$('#remark').val(result.model.remark);
+						
+						$('#update_time').val(getDateTimeString(result.model.updateTime));
+						
 					}
 			},'json');
 	 }

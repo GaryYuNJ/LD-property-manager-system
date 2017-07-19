@@ -1,9 +1,11 @@
 package com.ld.community.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -227,7 +229,7 @@ public class CommunityController extends BaseController {
 	}
 	
 	@RequestMapping(value="publicInfoList")
-	public ModelAndView getPublicInfoList(Long communityId, ModelMap modelMap){
+	public ModelAndView getPublicInfoList(Long communityId, Integer pageNo, ModelMap modelMap){
 		//获取用户有关系的小区
 		Long userId = TokenManager.getUserId();
 		List<CommunityModel> communities = communityService.queryCommunitiesByUserId(userId); 
@@ -242,6 +244,10 @@ public class CommunityController extends BaseController {
 		
 		//如果入参 communityId为空，取有关系小区第一个值；
 		modelMap.put("findContent", communityId);
+		if(null == pageNo || pageNo == 0){
+			pageNo = 1;
+		}
+		
 		Pagination<PublicInformationModel> publicInformation = publicInfoService.findPage(modelMap,pageNo,pageSize);
 		
 		modelMap.put("pageIndex", 2);
@@ -261,16 +267,17 @@ public class CommunityController extends BaseController {
 			
 			if(null == publicInfoService.selectByPrimaryKey(publicInformationModel.getId()))
 			{
-				int count = publicInfoService.insertSelective(publicInformationModel);
 				publicInformationModel.setCreateTime(new Date());
 				publicInformationModel.setUpdateTime(new Date());
 				publicInformationModel.setProcessUser(TokenManager.getUserId());
+				int count = publicInfoService.insertSelective(publicInformationModel);
 				resultMap.put("status", 200);
 				resultMap.put("successCount", count);
 			}else{
-				int count = publicInfoService.updateByPrimaryKeySelective(publicInformationModel);
+				
 				publicInformationModel.setUpdateTime(new Date());
 				publicInformationModel.setProcessUser(TokenManager.getUserId());
+				int count = publicInfoService.updateByPrimaryKeySelective(publicInformationModel);
 				resultMap.put("status", 200);
 				resultMap.put("successCount", count);
 			}
@@ -317,7 +324,7 @@ public class CommunityController extends BaseController {
 	
 
 	@RequestMapping(value="lostInfoList")
-	public ModelAndView getLostInfoList(Long communityId, ModelMap modelMap){
+	public ModelAndView getLostInfoList(Long communityId, Integer pageNo, ModelMap modelMap){
 		//获取用户有关系的小区
 		Long userId = TokenManager.getUserId();
 		List<CommunityModel> communities = communityService.queryCommunitiesByUserId(userId); 
@@ -328,6 +335,12 @@ public class CommunityController extends BaseController {
 			communityId = 0L;
 		}else if(null == communityId){
 			communityId = communities.get(0).getId();
+		}
+		
+		//如果入参 communityId为空，取有关系小区第一个值；
+		modelMap.put("findContent", communityId);
+		if(null == pageNo || pageNo == 0){
+			pageNo = 1;
 		}
 		
 		//如果入参 communityId为空，取有关系小区第一个值；
@@ -349,18 +362,25 @@ public class CommunityController extends BaseController {
 	public Map<String,Object> addLostInfo(LostInfoFormModel lostInformationModel){
 		try {
 			
+			if(StringUtils.isNotEmpty(lostInformationModel.getPickupTimeStr())){
+				 SimpleDateFormat myFmt=new SimpleDateFormat("yy-MM-dd");        
+				 lostInformationModel.setTime(myFmt.parse(lostInformationModel.getPickupTimeStr()));
+			}
+			
 			if(null == lostInfoService.selectByPrimaryKey(lostInformationModel.getId()))
 			{
-				int count = lostInfoService.insertSelective(lostInformationModel);
+				
 				lostInformationModel.setCreateTime(new Date());
 				lostInformationModel.setUpdateTime(new Date());
 				lostInformationModel.setProcessUser(TokenManager.getUserId());
+				int count = lostInfoService.insertSelective(lostInformationModel);
 				resultMap.put("status", 200);
 				resultMap.put("successCount", count);
 			}else{
-				int count = lostInfoService.updateByPrimaryKeySelective(lostInformationModel);
+				
 				lostInformationModel.setUpdateTime(new Date());
 				lostInformationModel.setProcessUser(TokenManager.getUserId());
+				int count = lostInfoService.updateByPrimaryKeySelective(lostInformationModel);
 				resultMap.put("status", 200);
 				resultMap.put("successCount", count);
 			}
@@ -407,7 +427,7 @@ public class CommunityController extends BaseController {
 	
 	
 	@RequestMapping(value="ownerCallfixList")
-	public ModelAndView getOwnerCallfixList(Long communityId, ModelMap modelMap){
+	public ModelAndView getOwnerCallfixList(Long communityId, Integer pageNo, ModelMap modelMap){
 		//获取用户有关系的小区
 		Long userId = TokenManager.getUserId();
 		List<CommunityModel> communities = communityService.queryCommunitiesByUserId(userId); 
@@ -420,6 +440,12 @@ public class CommunityController extends BaseController {
 			communityId = communities.get(0).getId();
 		}
 		
+		
+		//如果入参 communityId为空，取有关系小区第一个值；
+		modelMap.put("findContent", communityId);
+		if(null == pageNo || pageNo == 0){
+			pageNo = 1;
+		}
 		//如果入参 communityId为空，取有关系小区第一个值；
 		modelMap.put("findContent", communityId);
 		Pagination<OwnerCallfixFormModel> ownerCallfixrmation = ownerCallfixService.findPage(modelMap,pageNo,pageSize);
@@ -441,16 +467,16 @@ public class CommunityController extends BaseController {
 			
 			if(null == ownerCallfixService.selectByPrimaryKey(ownerCallfixFormModel.getId()))
 			{
-				int count = ownerCallfixService.insertSelective(ownerCallfixFormModel);
 				ownerCallfixFormModel.setCreateTime(new Date());
 				ownerCallfixFormModel.setUpdateTime(new Date());
 				ownerCallfixFormModel.setProcessUser(TokenManager.getUserId());
+				int count = ownerCallfixService.insertSelective(ownerCallfixFormModel);
 				resultMap.put("status", 200);
 				resultMap.put("successCount", count);
 			}else{
-				int count = ownerCallfixService.updateByPrimaryKeySelective(ownerCallfixFormModel);
 				ownerCallfixFormModel.setUpdateTime(new Date());
 				ownerCallfixFormModel.setProcessUser(TokenManager.getUserId());
+				int count = ownerCallfixService.updateByPrimaryKeySelective(ownerCallfixFormModel);
 				resultMap.put("status", 200);
 				resultMap.put("successCount", count);
 			}

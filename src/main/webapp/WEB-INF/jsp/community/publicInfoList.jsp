@@ -133,6 +133,27 @@
 			            </div>
 			        </div>  
 			    </div> 
+			    <div class="form-group groupheight clearfix"> 
+			    	
+			        <div class="col-lg-4 col-lg-4new">
+			            <label class="col-lg-5 control-label pt7 ">公告标签</label>
+			            <div class="col-lg-7">
+			                <input type="text" class="form-control form-controlbg" 
+			                name="label" id="label" placeholder="输入公告标签">
+			            </div>
+			        </div>	
+			        <div class="col-lg-4 col-lg-4new">
+			            <label class="col-lg-5 control-label pt7">标签颜色</label>
+			            <div class="col-lg-7">
+			                <select  name="label_color" id="label_color"  class="form-control selectfont">
+			                	<option value="1">红</option>
+			                	<option value="2">绿</option>
+			                	<option value="3">黄</option>
+			                	<option value="4">青</option>
+			                </select>						        			
+			            </div>
+			        </div>  
+			    </div> 
 			    <div class="form-group groupheight clearfix">
 			        <div class="col-lg-12 col-lg-4new">
 			            <label class="col-lg-2 control-label pt7 col-lg-2modal">公告内容</label>
@@ -224,6 +245,8 @@ function initCommunitySelectList() {
 				organization = $('#organization').val(),
 				content = $('#content').val(),
 				selectStatus = $('#selectStatus').val();
+				label = $('#label').val();
+				labelColor = $('#label_color').val();
 			
 			if($.trim(title) == ''){
 				return layer.msg('标题不能为空。',so.default),!1;
@@ -251,7 +274,9 @@ function initCommunitySelectList() {
 				title:title,
 				organization:organization,
 				content:content,
-				status:status
+				status:status,
+				label:label,
+				labelColor:labelColor
 				},
 				function(result){
 					layer.close(load);

@@ -297,6 +297,7 @@ function initCommunitySelectList() {
 				communityId = $('#selectCommunityModal').val(),
 				objectName = $('#object_name').val(),
 				pickupUserName = $('#pickup_user_name').val(),
+				//pickupTime = $('#datepicker').datepicker("getDate"),
 				pickupTime = $('#datepicker').val(),
 				pickupLocation = $('#pickup_location').val(),
 				desc = $('#desc').val(),
@@ -329,7 +330,7 @@ function initCommunitySelectList() {
 				communityId:communityId,
 				objectName:objectName,
 				pickupUserName:pickupUserName,
-				pickupTime:pickupTime,
+				pickupTimeStr:pickupTime,
 				pickupLocation:pickupLocation,
 				desc:desc,
 				mobile:mobile,
@@ -341,14 +342,19 @@ function initCommunitySelectList() {
 				remark:remark
 				},
 				function(result){
-					layer.close(load);
-					if(result && result.status != 200){
-						return layer.msg(result.message,so.default),!1;
+					if(result.status == '200'){
+						layer.close(load);
+						if(result && result.status != 200){
+							return layer.msg(result.message,so.default),!1;
+						}
+						layer.msg('保存成功。');
+						setTimeout(function(){
+							$('#formId').submit();
+						},1000);
+					}else{
+						layer.msg('保存失败，服务器异常。');
 					}
-					layer.msg('保存成功。');
-					setTimeout(function(){
-						$('#formId').submit();
-					},1000);
+					
 				},'json');
 		}
 	</shiro:hasPermission>

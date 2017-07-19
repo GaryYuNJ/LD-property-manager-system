@@ -10,6 +10,8 @@
 		$('#organization').val(null),
 		$('#content').val(null),
 		$('#selectStatus').val("1");
+		$('#label').val("");
+		$('#label_color').val("1");
    	}
 	 
 	function popEmptyPublicInfoDetail() {
@@ -33,6 +35,8 @@
 						$('#organization').val(result.model.organization);
 						$('#content').val(result.model.content);
 						$('#selectStatus').val(result.model.status);
+						$('#label').val(result.model.label);
+						$('#label_color').val(result.model.labelColor);
 					}
 			},'json');
 	 }

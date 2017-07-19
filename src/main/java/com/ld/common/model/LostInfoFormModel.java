@@ -20,6 +20,8 @@ public class LostInfoFormModel {
     private String objectDesc;
 
     private Date time;
+    
+    private String pickupTimeStr;
 
     private String claimLocation;
 
@@ -39,7 +41,16 @@ public class LostInfoFormModel {
 
     private Date updateTime;
 
-    public Long getId() {
+
+	public String getPickupTimeStr() {
+		return pickupTimeStr;
+	}
+
+	public void setPickupTimeStr(String pickupTimeStr) {
+		this.pickupTimeStr = pickupTimeStr;
+	}
+
+	public Long getId() {
         return id;
     }
 

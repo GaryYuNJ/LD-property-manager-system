@@ -7,6 +7,10 @@ public class PublicInformationModel {
 
     private Long communityId;
 
+    private String label;
+
+    private Long labelColor;
+
     private String organization;
 
     private String title;
@@ -35,6 +39,22 @@ public class PublicInformationModel {
 
     public void setCommunityId(Long communityId) {
         this.communityId = communityId;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label == null ? null : label.trim();
+    }
+
+    public Long getLabelColor() {
+        return labelColor;
+    }
+
+    public void setLabelColor(Long labelColor) {
+        this.labelColor = labelColor;
     }
 
     public String getOrganization() {

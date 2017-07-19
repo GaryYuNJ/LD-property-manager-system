@@ -37,3 +37,26 @@
 })($,window);
 
 
+
+function add0(m) {
+    return m < 10 ? '0' + m : m
+}
+function getDateString(value){//value为13位的时间戳
+    var time = new Date(parseInt(value));
+    var y = time.getFullYear();
+    var m = time.getMonth() + 1;
+    var d = time.getDate();
+
+    return y + '-' + add0(m) + '-' + add0(d) ;
+}
+function getDateTimeString(value){//value为13位的时间戳
+	var time = new Date(parseInt(value));
+	var y = time.getFullYear();
+	var m = time.getMonth() + 1;
+	var d = time.getDate();
+	var h = time.getHours();
+	var mi = time.getMinutes();
+
+	return y + '-' + add0(m) + '-' + add0(d) + ' ' + h + ':'+ mi;
+}
+
