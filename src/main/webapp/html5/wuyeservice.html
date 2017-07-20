@@ -46,9 +46,10 @@
 <script type="text/javascript">
 	var communityCode = getQueryString('communityCode');
 	var ssoTicket = getQueryString('ssoTicket');
+	var userMobile = getQueryString('userMobile');
 
 	function openUrl(path) {
-		window.location.href= rootUri + path + '?communityCode='+communityCode+'&ssoTicket='+ssoTicket;
+		window.location.href= rootUri + path + '?communityCode='+communityCode + '&ssoTicket=' + ssoTicket + '&userMobile=' + userMobile;
 	}
 	
 </script>

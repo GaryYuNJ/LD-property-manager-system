@@ -17,7 +17,7 @@
     <div class="container rel">
     
         <div class="content rel">
-            <div class="item rel">
+            <div hidden class="item rel">
                 <div class="tag abs">报修单位</div>
                 <div class="input rel">
                     <input id="organization" class="placeholder" placeholder="请输入报修单位" type="text">
@@ -42,9 +42,9 @@
                 </div>
             </div>
             <div class="item rel">
-                <div class="tag abs">报修内容</div>
+                <div class="tag abs">报修描述</div>
                 <div class="input rel">
-                    <input  id="callfix_desc" class="placeholder"  placeholder="请输入报修内容" type="text">
+                    <input  id="callfix_desc" class="placeholder"  placeholder="请输入报修描述" type="text">
                 </div>
             </div>
         </div>
@@ -71,6 +71,8 @@
     
     var communityCode = getQueryString('communityCode');
     var ssoTicket = getQueryString('ssoTicket');
+    var userMobile = getQueryString('userMobile');
+    $('#mobile').val(userMobile);
     
     function showMsg(msg,type) {
         var tclass = type == 1? 'mgshowMsg-error': 'mgshowMsg-success',
