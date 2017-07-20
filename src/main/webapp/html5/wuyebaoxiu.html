@@ -72,7 +72,9 @@
     var communityCode = getQueryString('communityCode');
     var ssoTicket = getQueryString('ssoTicket');
     var userMobile = getQueryString('userMobile');
-    $('#mobile').val(userMobile);
+    if(null != userMobile && '' != userMobile){
+    	$('#mobile').val(userMobile);
+    }
     
     function showMsg(msg,type) {
         var tclass = type == 1? 'mgshowMsg-error': 'mgshowMsg-success',

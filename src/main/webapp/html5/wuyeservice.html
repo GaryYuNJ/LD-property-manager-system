@@ -47,7 +47,10 @@
 	var communityCode = getQueryString('communityCode');
 	var ssoTicket = getQueryString('ssoTicket');
 	var userMobile = getQueryString('userMobile');
-
+	if(null == userMobile){
+		userMobile="";
+    }
+	
 	function openUrl(path) {
 		window.location.href= rootUri + path + '?communityCode='+communityCode + '&ssoTicket=' + ssoTicket + '&userMobile=' + userMobile;
 	}
