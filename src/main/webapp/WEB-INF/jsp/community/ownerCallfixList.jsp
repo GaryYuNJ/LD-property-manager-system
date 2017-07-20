@@ -67,7 +67,10 @@
 										
 										<td> <fmt:formatDate pattern="yyyy-MM-dd HH:ss" value="${it.createTime}" /></td>
 										<td>
+											<i class="glyphicon glyphicon-plus"></i>
 											<a href="javascript:popOwnerCallfixDetailById(${it.id});">详情</a>
+											&nbsp&nbsp&nbsp&nbsp&nbsp
+											
 											<shiro:hasPermission  name="/community/deleteOwnerCallfixById.shtml">
 												<i class="glyphicon glyphicon-remove"></i>
 												<a href="javascript:deleteById(${it.id});">删除</a>

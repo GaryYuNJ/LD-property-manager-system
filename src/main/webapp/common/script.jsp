@@ -19,7 +19,7 @@
 <span class="totop"><a href="#"><i class="icon-chevron-up"></i></a></span>
 <!-- JS -->
 <script src="<c:url value="/js/jquery.js" />"></script>
-<script src="<c:url value="/js/jquery。min.js" />"></script>
+<script src="<c:url value="/js/jquery.min.js" />"></script>
 <script src="<c:url value="/js/jquery-form.3.50.js" />"></script>
 <!-- jQuery -->
 <script src="<c:url value="/js/bootstrap.min.js" />"></script>

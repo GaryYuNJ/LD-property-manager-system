@@ -54,7 +54,10 @@
 										<td>${it.code}</td>
 										<td>${it.cityCode}</td>
 										<td>
+											<i class="glyphicon glyphicon-plus"></i>
 											<a href="javascript:popCommunityDetailById(${it.id});">详情</a>
+											&nbsp&nbsp&nbsp&nbsp&nbsp
+											
 											<shiro:hasPermission  name="/community/deleteCommunityById.shtml">
 												<i class="glyphicon glyphicon-remove"></i>
 												<a href="javascript:deleteById(${it.id});">删除</a>

@@ -14,7 +14,7 @@ insert  into `u_permission`(`id`,`url`,`name`) values (4,'/permission/index.shtm
 (14,'/role/clearRoleByUserIds.shtml','用户角色分配清空'),(15,'/role/addRole2User.shtml','角色分配保存'),(16,'/role/deleteRoleById.shtml','角色列表删除'),(17,'/role/addRole.shtml','角色列表添加')
 ,(18,'/role/index.shtml','角色列表'),(19,'/permission/allocation.shtml','权限分配'),(20,'/role/allocation.shtml','角色分配'),(21,'/community/addCommunity.shtml','创建小区'),
 (22,'/community/addPublicInfo.shtml','创建公告'), (23,'/community/deletePublicInfoById.shtml','删除公告'), (24,'/community/deleteCommunityById.shtml','删除小区'),
-(25,'/community/addlostInfoList.shtml','创建公告'), (26,'/community/deleteLostInfoList.shtml','删除公告'),
+(25,'/community/addlostInfo.shtml','创建失物信息'), (26,'/community/deleteLostInfo.shtml','删除失物信息'),
 (27,'/community/addOwnerCallfix.shtml','创建报修'), (28,'/community/deleteOwnerCallfixById.shtml','删除报修');
 
 
@@ -26,8 +26,7 @@ insert  into `u_role`
 (id, `name`, code)
  values 
  (1,'系统管理员','888888'), (3,'权限角色','100003'), (4,'用户中心','100002'),
- (5, '物管经理', '100004'),  (6, '物管经理助理', '100005')
-;
+ (5, '物业管理', '100004');
 
 /*Data for the table `u_role_permission` */
 
@@ -41,11 +40,17 @@ values (4,8),(4,9),(4,10),(4,11),(4,12),(3,4),(3,6),(3,7),(3,13),(3,14),(3,15),(
 insert  into `u_user`(`id`,`nickname`,`mobile`,`email`,`pswd`,`create_time`,`last_login_time`,`status`) values 
 (1,'管理员','admin','admin','57dd03ed397eabaeaa395eb740b770fd','2016-06-16 11:15:33','2016-06-16 11:24:10',1),
 (11,'1111','1111','8446@qq.com','d57ffbe486910dd5b26d0167d034f9ad','2016-05-26 20:50:54','2016-06-16 11:24:35',1),
-(12,'2222','2222','2222','4afdc875a67a55528c224ce088be2ab8','2016-05-27 22:34:19','2016-06-15 17:03:16',1);
+(12,'2222','2222','2222','4afdc875a67a55528c224ce088be2ab8','2016-05-27 22:34:19','2016-06-15 17:03:16',1),
+(21,'南京绿地之窗管理员','njldzc','njldzc','f44c757637357b28236ce33218194880','2016-06-16 11:15:33','2016-06-16 11:24:10',1),
+(22,'南京国际花都管理员','njgjhd','njgjhd','2028c814d280429212f0d37e2430cc91','2016-06-16 11:15:33','2016-06-16 11:24:10',1),
+(23,'徐州绿地之窗管理员','xzldzc','xzldzc','2559ce643506e91704615e2ee4d955be','2016-06-16 11:15:33','2016-06-16 11:24:10',1),
+(24,'徐州商务城管理员','xzswc','xzswc','62478ee2effe99099029d351b6d5e9ee','2016-06-16 11:15:33','2016-06-16 11:24:10',1),
+(25,'徐州和平壹号管理员','xzhpyh','xzhpyh','fe99d6d8cd6331b4e5e25eccf1c1e918','2016-06-16 11:15:33','2016-06-16 11:24:10',1),
+(26,'徐州泊林公馆管理员','xzblgg','xzblgg','ff051ffc2486b06e301ddde26625ebe0','2016-06-16 11:15:33','2016-06-16 11:24:10',1);
 
 /*Data for the table `u_user_role` */
 
-insert  into `u_user_role`(`uid`,`rid`) values (12,4),(11,3),(11,4),(1,1);
+insert  into `u_user_role`(`uid`,`rid`) values (12,4),(11,3),(11,4),(1,1),(21,5),(22,5),(23,5),(24,5),(25,5),(26,5);
 
 
 insert  into `house_business_type`
@@ -65,14 +70,33 @@ values
 (12,'未分配',5);
 
 
+insert into property_company (id, name  ,   code    )values(15, '南京绿地之窗物业','1')
+insert into property_company (id, name  ,   code    )values(16,'南京国际花都物业','2')
+insert into property_company (id, name  ,   code    )values(17,'徐州绿地之窗物业','3');
+insert into property_company (id, name  ,   code    )values(18,'徐州商务城物业','4');
+insert into property_company (id, name  ,   code    )values(19,'徐州和平壹号物业','5');
+insert into property_company (id, name  ,   code    )values(20,'徐州泊林公馆物业','6');
 
 
+insert into user_property_company_rel( user_id ,    property_company_id  ,   status) values (1,15,1);
+insert into user_property_company_rel( user_id ,    property_company_id  ,   status) values (1,16,1);
+insert into user_property_company_rel( user_id ,    property_company_id  ,   status) values (1,17,1);
+insert into user_property_company_rel( user_id ,    property_company_id  ,   status) values (1,18,1);
+insert into user_property_company_rel( user_id ,    property_company_id  ,   status) values (1,19,1);
+insert into user_property_company_rel( user_id ,    property_company_id  ,   status) values (1,20,1);
+
+insert into user_property_company_rel( user_id ,    property_company_id  ,   status) values (21,15,1);
+insert into user_property_company_rel( user_id ,    property_company_id  ,   status) values (22,16,1);
+insert into user_property_company_rel( user_id ,    property_company_id  ,   status) values (23,17,1);
+insert into user_property_company_rel( user_id ,    property_company_id  ,   status) values (24,18,1);
+insert into user_property_company_rel( user_id ,    property_company_id  ,   status) values (25,19,1);
+insert into user_property_company_rel( user_id ,    property_company_id  ,   status) values (26,20,1);
 
 
-
-
-
-
-
+	
+	
+	
+	
+	
 
 
