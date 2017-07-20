@@ -44,7 +44,7 @@
 							<th>公告标题</th>
 							<th>发布组织</th>
 							<th>状态</th>
-							<th>更新时间</th>
+							<th>创建时间</th>
 							<th>操作</th>
 						</tr>
 						<c:if test="${page != null}">
@@ -53,7 +53,7 @@
 										<td>${it.title}</td>
 										<td>${it.organization}</td>
 										<td>${it.status}</td>
-										<td>${it.updateTime}</td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd HH:ss" value="${it.createTime}" /></td>
 										<td>
 											<a href="javascript:popPublicInfoDetailById(${it.id});">详情</a>
 											<shiro:hasPermission  name="/community/deletePublicInfoById.shtml">

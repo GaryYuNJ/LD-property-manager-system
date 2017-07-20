@@ -294,10 +294,10 @@ DROP TABLE IF EXISTS `owner_basic_info`;
 
 CREATE TABLE owner_basic_info ( 
      `id` bigint(20) NOT NULL AUTO_INCREMENT,
-     `code` bigint(20) NOT NULL COMMENT '业主编号',
+     `crm_cus_id` varchar(20) NOT NULL unique COMMENT '业主CRM编号',
      `real_name` varchar(25) NOT NULL COMMENT '名字',
      `gender` varchar(1) DEFAULT NULL COMMENT '性别',
-     `mobile` bigint(20) NOT NULL unique COMMENT '手机号',
+     `mobile` varchar(20) NOT NULL COMMENT '手机号',
 
      PRIMARY KEY(ID)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -385,10 +385,11 @@ DROP TABLE IF EXISTS `owner_callfix_form`;
 
 CREATE TABLE `owner_callfix_form` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `owner_id` bigint(20) NOT NULL COMMENT '用户id',
+  `owner_id` bigint(20) default NULL COMMENT '用户id',
   `community_id` bigint(20) NOT NULL COMMENT '小区外键',
-  `organization`   varchar(50) DEFAULT NULL COMMENT '报修单位',
+  `organization`  varchar(50) DEFAULT NULL COMMENT '报修单位',
   `object`   varchar(50) DEFAULT NULL COMMENT '报修物品',
+  `name`   varchar(20) DEFAULT NULL COMMENT '报修人姓名',
   `mobile`   varchar(50) DEFAULT NULL COMMENT '联系电话',
   `callfix_desc`   varchar(50) DEFAULT NULL COMMENT '报修内容',
   

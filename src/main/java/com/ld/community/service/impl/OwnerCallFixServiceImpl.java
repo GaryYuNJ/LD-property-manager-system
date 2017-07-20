@@ -6,7 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ld.common.dao.OwnerBasicModelMapper;
 import com.ld.common.dao.OwnerCallfixFormModelMapper;
+import com.ld.common.model.OwnerBasicModel;
 import com.ld.common.model.OwnerCallfixFormModel;
 import com.ld.common.utils.LoggerUtils;
 import com.ld.community.service.OwnerCallFixService;
@@ -18,36 +20,39 @@ import com.ld.core.mybatis.page.Pagination;
 public class OwnerCallFixServiceImpl extends BaseMybatisDao<OwnerCallfixFormModelMapper> implements OwnerCallFixService {
 
 	@Autowired
-	OwnerCallfixFormModelMapper OwnerCallfixFormModelMapper;
+	OwnerCallfixFormModelMapper ownerCallfixFormModelMapper;
+	
+	@Autowired
+	OwnerBasicModelMapper ownerBasicModelMapper;
 	
 	@Override
 	public int deleteByPrimaryKey(Long id) {
-		return OwnerCallfixFormModelMapper.deleteByPrimaryKey(id);
+		return ownerCallfixFormModelMapper.deleteByPrimaryKey(id);
 	}
 
 	@Override
 	public int insert(OwnerCallfixFormModel record) {
-		return OwnerCallfixFormModelMapper.insert(record);
+		return ownerCallfixFormModelMapper.insert(record);
 	}
 
 	@Override
 	public int insertSelective(OwnerCallfixFormModel record) {
-		return OwnerCallfixFormModelMapper.insertSelective(record);
+		return ownerCallfixFormModelMapper.insertSelective(record);
 	}
 
 	@Override
 	public OwnerCallfixFormModel selectByPrimaryKey(Long id) {
-		return OwnerCallfixFormModelMapper.selectByPrimaryKey(id);
+		return ownerCallfixFormModelMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
 	public int updateByPrimaryKey(OwnerCallfixFormModel record) {
-		return OwnerCallfixFormModelMapper.updateByPrimaryKey(record);
+		return ownerCallfixFormModelMapper.updateByPrimaryKey(record);
 	}
 
 	@Override
 	public int updateByPrimaryKeySelective(OwnerCallfixFormModel record) {
-		return OwnerCallfixFormModelMapper.updateByPrimaryKeySelective(record);
+		return ownerCallfixFormModelMapper.updateByPrimaryKeySelective(record);
 	}
 
 	
@@ -73,5 +78,16 @@ public class OwnerCallFixServiceImpl extends BaseMybatisDao<OwnerCallfixFormMode
 		return resultMap;
 	}
 
+	@Override
+	public OwnerBasicModel selectByCRMCusId(String cmcustid) {
+		// TODO Auto-generated method stub
+		return ownerBasicModelMapper.selectByCRMCusId(cmcustid);
+	}
+
+	@Override
+	public int insertUserBasicInfo(OwnerBasicModel ownerBasicModel) {
+		// TODO Auto-generated method stub
+		return ownerBasicModelMapper.insertSelective(ownerBasicModel);
+	}
 	
 }

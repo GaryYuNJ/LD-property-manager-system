@@ -3,13 +3,13 @@
 <mapper namespace="com.ld.common.dao.OwnerBasicModelMapper" >
   <resultMap id="BaseResultMap" type="com.ld.common.model.OwnerBasicModel" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="code" property="code" jdbcType="BIGINT" />
+    <result column="crm_cus_id" property="crmCusId" jdbcType="VARCHAR" />
     <result column="real_name" property="realName" jdbcType="VARCHAR" />
     <result column="gender" property="gender" jdbcType="VARCHAR" />
-    <result column="mobile" property="mobile" jdbcType="BIGINT" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, code, real_name, gender, mobile
+    id, crm_cus_id, real_name, gender, mobile
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -17,15 +17,23 @@
     from owner_basic_info
     where id = #{id,jdbcType=BIGINT}
   </select>
+  
+   <select id="selectByCRMCusId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from owner_basic_info
+    where crm_cus_id = #{cmcustid,jdbcType=VARCHAR}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from owner_basic_info
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.ld.common.model.OwnerBasicModel" >
-    insert into owner_basic_info (id, code, real_name, 
+    insert into owner_basic_info (id, crm_cus_id, real_name, 
       gender, mobile)
-    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, 
-      #{gender,jdbcType=VARCHAR}, #{mobile,jdbcType=BIGINT})
+    values (#{id,jdbcType=BIGINT}, #{crmCusId,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ld.common.model.OwnerBasicModel" >
     insert into owner_basic_info
@@ -33,8 +41,8 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="code != null" >
-        code,
+      <if test="crmCusId != null" >
+        crm_cus_id,
       </if>
       <if test="realName != null" >
         real_name,
@@ -50,8 +58,8 @@
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="code != null" >
-        #{code,jdbcType=BIGINT},
+      <if test="crmCusId != null" >
+        #{crmCusId,jdbcType=VARCHAR},
       </if>
       <if test="realName != null" >
         #{realName,jdbcType=VARCHAR},
@@ -60,15 +68,15 @@
         #{gender,jdbcType=VARCHAR},
       </if>
       <if test="mobile != null" >
-        #{mobile,jdbcType=BIGINT},
+        #{mobile,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.ld.common.model.OwnerBasicModel" >
     update owner_basic_info
     <set >
-      <if test="code != null" >
-        code = #{code,jdbcType=BIGINT},
+      <if test="crmCusId != null" >
+        crm_cus_id = #{crmCusId,jdbcType=VARCHAR},
       </if>
       <if test="realName != null" >
         real_name = #{realName,jdbcType=VARCHAR},
@@ -77,17 +85,17 @@
         gender = #{gender,jdbcType=VARCHAR},
       </if>
       <if test="mobile != null" >
-        mobile = #{mobile,jdbcType=BIGINT},
+        mobile = #{mobile,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ld.common.model.OwnerBasicModel" >
     update owner_basic_info
-    set code = #{code,jdbcType=BIGINT},
+    set crm_cus_id = #{crmCusId,jdbcType=VARCHAR},
       real_name = #{realName,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=VARCHAR},
-      mobile = #{mobile,jdbcType=BIGINT}
+      mobile = #{mobile,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

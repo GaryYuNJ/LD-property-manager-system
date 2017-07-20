@@ -12,21 +12,26 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.ld.common.bean.SSORequestBean;
+import com.ld.common.bean.SSOResponseBean;
 import com.ld.common.controller.BaseController;
 import com.ld.common.model.CityModel;
 import com.ld.common.model.CommunityModel;
 import com.ld.common.model.DistrictModel;
 import com.ld.common.model.LostInfoFormModel;
+import com.ld.common.model.OwnerBasicModel;
 import com.ld.common.model.OwnerCallfixFormModel;
 import com.ld.common.model.PropertyCompanyModel;
 import com.ld.common.model.ProvinceModel;
 import com.ld.common.model.PublicInformationModel;
 import com.ld.common.model.URole;
 import com.ld.common.utils.LoggerUtils;
+import com.ld.common.utils.SSOServiceUtil;
 import com.ld.community.bean.CommonRequestParam;
 import com.ld.community.service.CommunityService;
 import com.ld.community.service.LostInfoService;
@@ -46,6 +51,7 @@ import com.ld.user.manager.UserManager;
 @Scope(value="prototype")
 @RequestMapping("open")
 public class CommunityOpenController extends BaseController {
+	
 	@Autowired
 	CommunityService communityService;
 	
@@ -153,18 +159,67 @@ public class CommunityOpenController extends BaseController {
 	public Map<String,Object> addOwnerCallfix(OwnerCallfixFormModel ownerCallfixFormModel){
 		try {
 			
+			//get communityId by code
+			CommunityModel communityModel = communityService.queryCommunityByCode(ownerCallfixFormModel.getCommunityCode());
+			if(null == communityModel){
+				resultMap.put("status", 400);
+				LoggerUtils.fmtError(getClass(), "addOwnerCallfix()  无法获取小区信息, CommunityCode:[%s]", ownerCallfixFormModel.getCommunityCode());
+				return resultMap;
+			}
+			ownerCallfixFormModel.setCommunityId(communityModel.getId());
+			
+			//根据ssoTicket获取用户id
+			//调用SSo接口
+			//查询用户表
+			try{
+				String ssoTicket = ownerCallfixFormModel.getSsoTicket();
+				SSORequestBean ssoRequest = new SSORequestBean();
+				Map<String,Object> params = new HashMap<String,Object>();
+				params.put("ticket", ssoTicket);
+				ssoRequest.setParams(params);
+				SSOResponseBean ssoResponse = SSOServiceUtil.getUserBasicInfo(ssoRequest);
+				if(null != ssoResponse && null != ssoResponse.getData() && null != ssoResponse.getData().getCmcustid()){
+					OwnerBasicModel ownerBasic = ownerCallfixService.selectByCRMCusId(ssoResponse.getData().getCmcustid());
+					//ownerCallfixFormModel.setOwnerId(null == ownerBasic ? null : ownerBasic.getId());
+					if(null != ownerBasic){
+						ownerCallfixFormModel.setOwnerId(ownerBasic.getId());
+						logger.info("成功获取本地用户ID: "+ownerBasic.getId());
+					}else{
+						LoggerUtils.fmtError(getClass(), "无法根据cmcustid获取本地用户信息。Cmcustid：[%s]", ssoResponse.getData().getCmcustid());
+						//自动添加用户信息到本地
+						ownerBasic = new OwnerBasicModel();
+						ownerBasic.setCrmCusId(ssoResponse.getData().getCmcustid());
+						ownerBasic.setMobile(ssoResponse.getData().getCmmobile());
+						ownerBasic.setRealName(ownerCallfixFormModel.getName());
+						ownerCallfixService.insertUserBasicInfo(ownerBasic);
+						logger.info("添加本地用户信息成功");
+						
+						//重新获取本地用户主键
+						ownerBasic = ownerCallfixService.selectByCRMCusId(ssoResponse.getData().getCmcustid());
+						ownerCallfixFormModel.setOwnerId(ownerBasic.getId());
+						logger.info("重新获取本地用户ID: "+ownerBasic.getId());
+					}
+				}else{
+					LoggerUtils.fmtError(getClass(), "无法根据ssoticket获取用户信息。ssoTicket:[%s]", ssoTicket);
+				}
+			}catch(Exception e){
+				logger.error("根据ssoticket获取用户信息失败", e);
+			}
+			
 			if(null == ownerCallfixService.selectByPrimaryKey(ownerCallfixFormModel.getId()))
 			{
-				int count = ownerCallfixService.insertSelective(ownerCallfixFormModel);
 				ownerCallfixFormModel.setCreateTime(new Date());
 				ownerCallfixFormModel.setUpdateTime(new Date());
 				ownerCallfixFormModel.setProcessUser(TokenManager.getUserId());
+				int count = ownerCallfixService.insertSelective(ownerCallfixFormModel);
+
 				resultMap.put("status", 200);
 				resultMap.put("successCount", count);
 			}else{
-				int count = ownerCallfixService.updateByPrimaryKeySelective(ownerCallfixFormModel);
 				ownerCallfixFormModel.setUpdateTime(new Date());
 				ownerCallfixFormModel.setProcessUser(TokenManager.getUserId());
+				int count = ownerCallfixService.updateByPrimaryKeySelective(ownerCallfixFormModel);
+
 				resultMap.put("status", 200);
 				resultMap.put("successCount", count);
 			}
@@ -172,7 +227,7 @@ public class CommunityOpenController extends BaseController {
 		} catch (Exception e) {
 			resultMap.put("status", 500);
 			resultMap.put("message", "添加失败，请刷新后再试！");
-			LoggerUtils.fmtError(getClass(), e, "添加小区报错。source[%s]",ownerCallfixFormModel.toString());
+			LoggerUtils.fmtError(getClass(), e, "添加报修信息报错。source[%s]",ownerCallfixFormModel.toString());
 		}
 		return resultMap;
 	}

@@ -6,7 +6,7 @@
 	function initOwnerCallfixModalDetail() {
 		
 		$('#ownerCallfix_id').val(null);
-		$('#owner_id').val(null);
+		$('#name').val(null);
 		$('#organization').val(null);
 		$('#object').val(null);
 		$('#mobile').val(null);
@@ -37,7 +37,7 @@
 						
 						$('#ownerCallfix_id').val(result.model.id);
 						
-						$('#owner_id').val(result.model.ownerId);
+						$('#name').val(result.model.name);
 						$('#organization').val(result.model.organization);
 						$('#object').val(result.model.object);
 						$('#mobile').val(result.model.mobile);

@@ -4,8 +4,6 @@
         var result = window.location.search.substr(1).match(reg);
         return result?decodeURIComponent(result[2]):null;
     }
-    
-    
 
 	var pathName = window.location.pathname;  
 	var paths = pathName.split('/');

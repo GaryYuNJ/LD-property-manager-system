@@ -41,19 +41,31 @@
 					
 					<table class="table table-striped table-bordered table-hover">
 						<tr>
-							<th>失物标题</th>
-							<th>发布组织</th>
+							<th>报修物品</th>
+							<th>报修人</th>
 							<th>状态</th>
-							<th>更新时间</th>
+							<th>报修时间</th>
 							<th>操作</th>
 						</tr>
 						<c:if test="${page != null}">
 							<c:forEach items="${page.list}" var="it">  
 									<tr>
-										<td>${it.title}</td>
-										<td>${it.organization}</td>
-										<td>${it.status}</td>
-										<td>${it.updateTime}</td>
+										<td>${it.object}</td>
+										<td>${it.name}</td>
+										
+										<c:choose>
+										    <c:when test="${it.status eq '0'}">
+										     <td>未处理</td>
+										    </c:when>
+										    <c:when test="${it.status eq '1'}">
+										        <td>正在处理</td>
+										    </c:when>
+										    <c:when test="${it.status eq '2'}">
+										        <td>处理完成</td>
+										    </c:when>
+										</c:choose>
+										
+										<td> <fmt:formatDate pattern="yyyy-MM-dd HH:ss" value="${it.createTime}" /></td>
 										<td>
 											<a href="javascript:popOwnerCallfixDetailById(${it.id});">详情</a>
 											<shiro:hasPermission  name="/community/deleteOwnerCallfixById.shtml">
@@ -107,10 +119,10 @@
 			            </div>
 			        </div>	
 			        <div class="col-lg-4 col-lg-4new">
-			            <label class="col-lg-5 control-label pt7 ">用户id</label>
+			            <label class="col-lg-5 control-label pt7 ">报修物品</label>
 			            <div class="col-lg-7">
 			                <input type="text" class="form-control form-controlbg" 
-			                name="owner_id" id="owner_id" placeholder="报修人信息" disabled>
+			                name="object" id="object" placeholder="输入报修物品名">
 			            </div>
 			        </div>	
 			        
@@ -118,12 +130,13 @@
 			     <div class="form-group groupheight clearfix"> 
 			    	
 			        <div class="col-lg-4 col-lg-4new">
-			            <label class="col-lg-5 control-label pt7 ">报修物品</label>
+			            <label class="col-lg-5 control-label pt7 ">报修人名</label>
 			            <div class="col-lg-7">
 			                <input type="text" class="form-control form-controlbg" 
-			                name="object" id="object" placeholder="输入报修物品名">
+			                name="name" id="name" placeholder="报修人信息" disabled>
 			            </div>
 			        </div>	
+			        
 			        <div class="col-lg-4 col-lg-4new">
 			            <label class="col-lg-5 control-label pt7 ">联系电话</label>
 			            <div class="col-lg-7">
@@ -258,7 +271,7 @@ function initCommunitySelectList() {
 		function addOwnerCallfix(){
 			var id = $('#ownerCallfix_id').val(),
 				communityId = $('#selectCommunityModal').val(),
-				ownerId = $('#owner_id').val(),
+				name = $('#name').val(),
 				organization = $('#organization').val(),
 				object = $('#object').val(),
 				mobile = $('#mobile').val(),

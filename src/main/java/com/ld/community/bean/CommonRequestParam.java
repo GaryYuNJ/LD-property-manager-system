@@ -4,9 +4,18 @@ public class CommonRequestParam {
 
 	private String communityCode;
 	
-    private Long communityId;
-
     private Integer pageNo;
+    
+    private String ssoTicket;
+    
+	public String getSsoTicket() {
+		return ssoTicket;
+	}
+
+	public void setSsoTicket(String ssoTicket) {
+		this.ssoTicket = ssoTicket;
+	}
+
 
 	public String getCommunityCode() {
 		return communityCode;
@@ -14,14 +23,6 @@ public class CommonRequestParam {
 
 	public void setCommunityCode(String communityCode) {
 		this.communityCode = communityCode;
-	}
-
-	public Long getCommunityId() {
-		return communityId;
-	}
-
-	public void setCommunityId(Long communityId) {
-		this.communityId = communityId;
 	}
 
 	public Integer getPageNo() {

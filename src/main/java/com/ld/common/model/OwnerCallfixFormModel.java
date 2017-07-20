@@ -2,7 +2,9 @@ package com.ld.common.model;
 
 import java.util.Date;
 
-public class OwnerCallfixFormModel {
+import com.ld.community.bean.CommonRequestParam;
+
+public class OwnerCallfixFormModel extends CommonRequestParam{
     private Long id;
 
     private Long ownerId;
@@ -12,6 +14,8 @@ public class OwnerCallfixFormModel {
     private String organization;
 
     private String object;
+
+    private String name;
 
     private String mobile;
 
@@ -30,8 +34,8 @@ public class OwnerCallfixFormModel {
     private Date createTime;
 
     private Date updateTime;
-
-    public Long getId() {
+    
+	public Long getId() {
         return id;
     }
 
@@ -69,6 +73,14 @@ public class OwnerCallfixFormModel {
 
     public void setObject(String object) {
         this.object = object == null ? null : object.trim();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
     public String getMobile() {

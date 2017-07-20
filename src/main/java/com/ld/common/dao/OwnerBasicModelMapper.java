@@ -14,4 +14,6 @@ public interface OwnerBasicModelMapper {
     int updateByPrimaryKeySelective(OwnerBasicModel record);
 
     int updateByPrimaryKey(OwnerBasicModel record);
+
+    OwnerBasicModel selectByCRMCusId(String cmcustid);
 }

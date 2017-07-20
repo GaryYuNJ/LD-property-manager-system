@@ -3,13 +3,13 @@ package com.ld.common.model;
 public class OwnerBasicModel {
     private Long id;
 
-    private Long code;
+    private String crmCusId;
 
     private String realName;
 
     private String gender;
 
-    private Long mobile;
+    private String mobile;
 
     public Long getId() {
         return id;
@@ -19,12 +19,12 @@ public class OwnerBasicModel {
         this.id = id;
     }
 
-    public Long getCode() {
-        return code;
+    public String getCrmCusId() {
+        return crmCusId;
     }
 
-    public void setCode(Long code) {
-        this.code = code;
+    public void setCrmCusId(String crmCusId) {
+        this.crmCusId = crmCusId == null ? null : crmCusId.trim();
     }
 
     public String getRealName() {
@@ -43,11 +43,11 @@ public class OwnerBasicModel {
         this.gender = gender == null ? null : gender.trim();
     }
 
-    public Long getMobile() {
+    public String getMobile() {
         return mobile;
     }
 
-    public void setMobile(Long mobile) {
-        this.mobile = mobile;
+    public void setMobile(String mobile) {
+        this.mobile = mobile == null ? null : mobile.trim();
     }
 }

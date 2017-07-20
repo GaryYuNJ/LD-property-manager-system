@@ -44,7 +44,7 @@
 							<th>失物名称</th>
 							<th>拾获地点</th>
 							<th>状态</th>
-							<th>更新时间</th>
+							<th>创建时间</th>
 							<th>操作</th>
 						</tr>
 						<c:if test="${page != null}">
@@ -53,7 +53,7 @@
 										<td>${it.objectName}</td>
 										<td>${it.pickupLocation}</td>
 										<td>${it.status}</td>
-										<td>${it.updateTime}</td>
+										<td><fmt:formatDate pattern="yyyy-MM-dd HH:ss" value="${it.createTime}" /></td>
 										<td>
 											<a href="javascript:popLostInfoDetailById(${it.id});">详情</a>
 											<shiro:hasPermission  name="/community/deleteLostInfoById.shtml">

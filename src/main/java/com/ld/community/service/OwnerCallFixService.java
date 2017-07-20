@@ -2,6 +2,7 @@ package com.ld.community.service;
 
 import java.util.Map;
 
+import com.ld.common.model.OwnerBasicModel;
 import com.ld.common.model.OwnerCallfixFormModel;
 import com.ld.core.mybatis.page.Pagination;
 
@@ -24,5 +25,9 @@ public interface OwnerCallFixService {
 	int updateByPrimaryKeySelective(OwnerCallfixFormModel record);
 
 	Map<String, Object> deleteOwnerCallfixById(Long id);
+
+	OwnerBasicModel selectByCRMCusId(String cmcustid);
+
+	int insertUserBasicInfo(OwnerBasicModel ownerBasicModel);
 
 }
