@@ -102,14 +102,14 @@
 			<div class="modal-body"> 
 			    <div class="form-group groupheight clearfix"> 
 			    	<div class="col-lg-4 col-lg-4new">
-			            <label class="col-lg-5 control-label pt7 ">小区名称</label>
-			            <div class="col-lg-7">
+			            <label class="col-lg-3 control-label pt7 ">小区名称</label>
+			            <div class="col-lg-9">
 			                <input type="text" class="form-control form-controlbg" 
 			                name="community_name" id="community_name" placeholder="输入小区名称">
 			            </div>
 			        </div>	
 			        <div class="col-lg-4 col-lg-4new">
-			            <label class="col-lg-5 control-label pt7 ">小区编号</label>
+			            <label class="col-lg-3 control-label pt7 ">小区编号</label>
 			            <div class="col-lg-7">
 			                <input type="text" class="form-control form-controlbg" 
 			                name="community_code" id="community_code" placeholder="输入小区编号">
@@ -118,15 +118,15 @@
 			    </div> 
 			    <div class="form-group groupheight clearfix"> 
 			    	<div class="col-lg-4 col-lg-4new">
-			            <label class="col-lg-5 control-label pt7">省</label>
+			            <label class="col-lg-3 control-label pt7">省/直辖市</label>
 			            <div class="col-lg-7">
 			                <select  name="province" id="province" onchange="provinceChange();" class="form-control selectfont">
-			                	<option value="0">-选择省-</option>
+			                	<option value="0">-选择省/直辖市-</option>
 			                </select>						        			
 			            </div>
 			        </div>    
 			        <div class="col-lg-4 col-lg-4new">
-			            <label class="col-lg-5 control-label pt7">市</label>
+			            <label class="col-lg-3 control-label pt7">市</label>
 			            <div class="col-lg-7">
 			                <select  name="city" id="city"  onchange="cityChange();" class="form-control selectfont">
 			                	<option value="0">-选择市-</option>
@@ -134,7 +134,7 @@
 			            </div>
 			        </div>    
 			        <div class="col-lg-4 col-lg-4new">
-			            <label class="col-lg-5 control-label pt7">区</label>
+			            <label class="col-lg-3 control-label pt7">区</label>
 			            <div class="col-lg-7">
 			                <select  name="district" id="district" class="form-control selectfont">
 			                	<option value="0">-选择区/县-</option>
@@ -154,9 +154,9 @@
 			    </div>
 			    
 			    <div class="form-group groupheight clearfix">
-			        <div class="col-lg-4 col-lg-4new">
-			            <label class="col-lg-5 control-label pt7">物业公司</label>
-			            <div class="col-lg-7">
+			        <div class="col-lg-12 col-lg-4new">
+			            <label class="col-lg-2 control-label pt7 col-lg-2modal">物业公司</label>
+			            <div class="col-lg-3">
 			                <select  name="property_company" id="property_company" class="form-control selectfont">
 			                	<option value="0">-选择物业公司-</option>
 			                </select>						        			
@@ -166,14 +166,14 @@
 			    <div class="linehrmodal"></div>
 			    <div class="form-group groupheight clearfix">
 			        <div class="col-lg-4 col-lg-4new">
-			            <label class="col-lg-5 control-label pt7">最后更新人</label>
+			            <label class="col-lg-3 control-label pt7">最后更新人</label>
 			            <div class="col-lg-7">
 			                <input type="text" class="form-control form-controlbg" 
 			                name="update_user"  id="update_user"  disabled >
 			            </div>
 			        </div>
 			        <div class="col-lg-4 col-lg-4new">
-			            <label class="col-lg-5 control-label pt7">更新时间</label>
+			            <label class="col-lg-3 control-label pt7">更新时间</label>
 			            <div class="col-lg-7">
 			                <input type="text" class="form-control form-controlbg" 
 			                name="update_time"  id="update_time"   disabled>

@@ -32,6 +32,11 @@
         community_id = #{findContent,jdbcType=BIGINT}
         )
       </if>
+      <if test="status != null" >
+        and (
+        status = #{status,jdbcType=BIGINT}
+        )
+      </if>
       </where>
   </sql>
   <!-- 普通的分页查询 -->

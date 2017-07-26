@@ -52,7 +52,15 @@
 									<tr>
 										<td>${it.title}</td>
 										<td>${it.organization}</td>
-										<td>${it.status}</td>
+										<c:choose>
+										    <c:when test="${it.status eq '0'}">
+										     <td>无效</td>
+										    </c:when>
+										    <c:when test="${it.status eq '1'}">
+										        <td>有效</td>
+										    </c:when>
+										</c:choose>
+											
 										<td><fmt:formatDate pattern="yyyy-MM-dd HH:ss" value="${it.createTime}" /></td>
 										<td>
 											<i class="glyphicon glyphicon-plus"></i>
@@ -102,8 +110,8 @@
 			<div class="modal-body"> 
 			    <div class="form-group groupheight clearfix"> 
 			    	<div class="col-lg-4 col-lg-4new">
-			            <label class="col-lg-5 control-label pt7 ">小区名称</label>
-			            <div class="col-lg-7">
+			            <label class="col-lg-3 control-label pt7 ">小区名称</label>
+			            <div class="col-lg-9">
 			               <select  name="selectCommunityModal" id="selectCommunityModal" class="form-control selectfont">
 			                	<option value="0">-选择小区-</option>
 			                </select>	
@@ -120,8 +128,8 @@
 			     <div class="form-group groupheight clearfix"> 
 			    	
 			        <div class="col-lg-4 col-lg-4new">
-			            <label class="col-lg-5 control-label pt7 ">公告标题</label>
-			            <div class="col-lg-7">
+			            <label class="col-lg-3 control-label pt7 ">公告标题</label>
+			            <div class="col-lg-9">
 			                <input type="text" class="form-control form-controlbg" 
 			                name="title" id="title" placeholder="输入公告标题">
 			            </div>
@@ -247,7 +255,7 @@ function initCommunitySelectList() {
 				title = $('#title').val(),
 				organization = $('#organization').val(),
 				content = $('#content').val(),
-				selectStatus = $('#selectStatus').val();
+				status = $('#selectStatus').val();
 				label = $('#label').val();
 				labelColor = $('#label_color').val();
 			

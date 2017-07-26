@@ -9,7 +9,7 @@
 <head>
 <meta charset="utf-8">
 <!-- Title and other stuffs -->
-<title>绿地销售财务报表系统</title>
+<title>绿地物业管理系统</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="">
 <!-- Stylesheets -->
@@ -95,7 +95,7 @@ var rootUri="${rootUri}";
 							</a>
 							<ul class="dropdown-menu">
 								<li><a href="<c:url value="/community/communityList.shtml" />">小区列表</a></li>
-								<li><a href="<c:url value="" />">业主管理</a></li>
+								<li hidden><a href="<c:url value="" />">业主管理</a></li>
 								<li><a href="<c:url value="/community/publicInfoList.shtml" />">公告管理</a></li>
 								<li><a href="<c:url value="/community/ownerCallfixList.shtml" />">报修管理</a></li>
 								<li><a href="<c:url value="/community/lostInfoList.shtml" />">失物管理</a></li>

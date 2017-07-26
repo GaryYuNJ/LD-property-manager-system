@@ -61,8 +61,13 @@ public class CommunityController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value="communityList")
-	public ModelAndView getCommunityList(String findContent,ModelMap modelMap){
+	public ModelAndView getCommunityList(String findContent, Integer pageNo, ModelMap modelMap){
 		modelMap.put("findContent", findContent);
+		
+		if(null == pageNo || pageNo == 0){
+			pageNo = 1;
+		}
+		
 		Pagination<CommunityModel> community = communityService.findPage(modelMap,pageNo,pageSize);
 		modelMap.put("pageIndex", 0);
 		return new ModelAndView("community/communityList","page",community);

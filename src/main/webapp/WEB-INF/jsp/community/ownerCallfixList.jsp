@@ -114,8 +114,8 @@
 			<div class="modal-body"> 
 			    <div class="form-group groupheight clearfix"> 
 			    	<div class="col-lg-4 col-lg-4new">
-			            <label class="col-lg-5 control-label pt7 ">小区名称</label>
-			            <div class="col-lg-7">
+			            <label class="col-lg-3 control-label pt7 ">小区名称</label>
+			            <div class="col-lg-9">
 			               <select  name="selectCommunityModal" id="selectCommunityModal" class="form-control selectfont">
 			                	<option value="0">-选择小区-</option>
 			                </select>	
@@ -141,8 +141,8 @@
 			        </div>	
 			        
 			        <div class="col-lg-4 col-lg-4new">
-			            <label class="col-lg-5 control-label pt7 ">联系电话</label>
-			            <div class="col-lg-7">
+			            <label class="col-lg-3 control-label pt7 ">联系电话</label>
+			            <div class="col-lg-9">
 							 <input type="text"  class="form-control form-controlbg" 
 							 id="mobile" name="mobile" >
 			            </div>
@@ -180,8 +180,8 @@
 			            </div>
 			        </div>	
 			        <div class="col-lg-4 col-lg-4new">
-			            <label class="col-lg-5 control-label pt7 ">负责人联系号码</label>
-			            <div class="col-lg-7">
+			            <label class="col-lg-3 control-label pt7 ">负责人联系号码</label>
+			            <div class="col-lg-9">
 			                <input type="text" class="form-control form-controlbg" 
 			                name="responsible_person_mobile" id="responsible_person_mobile" placeholder="处理人联系号码">
 			            </div>

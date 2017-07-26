@@ -11,7 +11,7 @@
 					<li class="has_sub">
 						<a href="<c:url value="/community/communityList.shtml" />"><i class="icon-list-alt"></i> 小区列表 </a>
 					</li>
-					<li class="has_sub">
+					<li hidden class="has_sub">
 						<a href="<c:url value="/" />"><i class="icon-list-alt"></i> 业主管理 </a>
 					</li>
 					<li class="has_sub">

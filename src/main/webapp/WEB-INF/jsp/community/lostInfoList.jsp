@@ -52,7 +52,16 @@
 									<tr>
 										<td>${it.objectName}</td>
 										<td>${it.pickupLocation}</td>
-										<td>${it.status}</td>
+										
+										<c:choose>
+										    <c:when test="${it.status eq '0'}">
+										     <td>未认领</td>
+										    </c:when>
+										    <c:when test="${it.status eq '1'}">
+										        <td>已认领</td>
+										    </c:when>
+										</c:choose>
+										
 										<td><fmt:formatDate pattern="yyyy-MM-dd HH:ss" value="${it.createTime}" /></td>
 										<td>
 											
@@ -103,8 +112,8 @@
 			<div class="modal-body"> 
 			    <div class="form-group groupheight clearfix"> 
 			    	<div class="col-lg-4 col-lg-4new">
-			            <label class="col-lg-5 control-label pt7 ">小区名称</label>
-			            <div class="col-lg-7">
+			            <label class="col-lg-3 control-label pt7 ">小区名称</label>
+			            <div class="col-lg-9">
 			               <select  name="selectCommunityModal" id="selectCommunityModal" class="form-control selectfont">
 			                	<option value="0">-选择小区-</option>
 			                </select>	
@@ -161,8 +170,8 @@
 			    <div class="form-group groupheight clearfix"> 
 			    	
 			        <div class="col-lg-4 col-lg-4new">
-			            <label class="col-lg-5 control-label pt7 ">联系电话</label>
-			            <div class="col-lg-7">
+			            <label class="col-lg-3 control-label pt7 ">联系电话</label>
+			            <div class="col-lg-9">
 			                <input type="text" class="form-control form-controlbg" 
 			                name="mobile" id="mobile" placeholder="输入联系电话">
 			            </div>
@@ -198,15 +207,15 @@
 			    
 			    <div class="form-group groupheight clearfix"> 
 			        <div class="col-lg-4 col-lg-4new">
-			            <label class="col-lg-5 control-label pt7 ">认领人手机号</label>
-			            <div class="col-lg-7">
+			            <label class="col-lg-3 control-label pt7 ">认领人手机号</label>
+			            <div class="col-lg-9">
 			                <input type="text" class="form-control form-controlbg" 
 			                name="lost_user_mobile" id="lost_user_mobile" placeholder="输入认领人手机号">
 			            </div>
 			        </div>	
 			        <div class="col-lg-4 col-lg-4new">
-			            <label class="col-lg-5 control-label pt7 ">认领人身份证号</label>
-			            <div class="col-lg-7">
+			            <label class="col-lg-3 control-label pt7 ">认领人身份证号</label>
+			            <div class="col-lg-9">
 			                <input type="text" class="form-control form-controlbg" 
 			                name="lost_user_id" id="lost_user_id" placeholder="认领人身份证号">
 			            </div>

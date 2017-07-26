@@ -64,9 +64,9 @@ public class CommunityOpenController extends BaseController {
 	@Autowired
 	OwnerCallFixService ownerCallfixService;
 	
-	@RequestMapping(value="publicInfoListByCommunityCode",method=RequestMethod.POST)
+	@RequestMapping(value="validPubInfoListByCommunityCode",method=RequestMethod.POST)
 	@ResponseBody
-	public Object getPublicInfoListByCommunityCode(CommonRequestParam commonRequestParam){
+	public Object getValidPubInfoListByCommunityCode(CommonRequestParam commonRequestParam){
 		
 		String communityCode = commonRequestParam.getCommunityCode();
 		
@@ -80,6 +80,8 @@ public class CommunityOpenController extends BaseController {
 		Map<String,Object> modelMap = new HashMap<String,Object>();
 
 		modelMap.put("findContent", communityModel.getId());
+		modelMap.put("status", 1);//只查有效状态的公告
+		
 		Pagination<PublicInformationModel> informationList = publicInfoService.findPage(modelMap,pageNo,pageSize);
 		
 		return null != informationList ? informationList.getList():null;
