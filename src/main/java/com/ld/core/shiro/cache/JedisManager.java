@@ -162,4 +162,56 @@ public class JedisManager {
         }
         return sessions;
 	}
+	
+    public void saveStrValueByKey(String key, String value, int expireTime)
+            throws Exception {
+        Jedis jedis = null;
+        boolean isBroken = false;
+        try {
+            jedis = getJedis();
+            //jedis.select(dbIndex);
+            jedis.set(key, value);
+            if (expireTime > 0)
+                jedis.expire(key, expireTime);
+        } catch (Exception e) {
+            isBroken = true;
+            throw e;
+        } finally {
+            returnResource(jedis, isBroken);
+        }
+    }
+    
+    public void deleteStrValueByKey( String key) throws Exception {
+        Jedis jedis = null;
+        boolean isBroken = false;
+        try {
+            jedis = getJedis();
+            //jedis.select(dbIndex);
+            Long result = jedis.del(key);
+            LoggerUtils.fmtDebug(getClass(), "删除Session结果：%s" , result);
+        } catch (Exception e) {
+            isBroken = true;
+            throw e;
+        } finally {
+            returnResource(jedis, isBroken);
+        }
+    }
+
+    public String getStrValueByKey( String key) throws Exception {
+        Jedis jedis = null;
+        String result = null;
+        boolean isBroken = false;
+        try {
+            jedis = getJedis();
+            //jedis.select(dbIndex);
+            result = jedis.get(key);
+        } catch (Exception e) {
+            isBroken = true;
+            throw e;
+        } finally {
+            returnResource(jedis, isBroken);
+        }
+        return result;
+    }
+    
 }

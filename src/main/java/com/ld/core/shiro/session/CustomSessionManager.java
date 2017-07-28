@@ -43,7 +43,7 @@ public class CustomSessionManager {
 	/**
 	 * session status 
 	 */
-	public static final String SESSION_STATUS ="ld-finance-online-status";
+	public static final String SESSION_STATUS ="ld-property-online-status";
 	ShiroSessionRepository shiroSessionRepository;
 	
 	CustomShiroSessionDAO customShiroSessionDAO;
